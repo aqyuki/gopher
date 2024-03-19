@@ -53,5 +53,21 @@ func Test_convertLevel(t *testing.T) {
 }
 
 func TestFromEnv(t *testing.T) {
+	t.Run("develop mode", func(t *testing.T) {
+		t.Setenv(EnvLogMode, "develop")
+		actual := FromEnv()
+		assert.NotNil(t, actual)
+	})
 
+	t.Run("production mode", func(t *testing.T) {
+		t.Setenv(EnvLogMode, "production")
+		actual := FromEnv()
+		assert.NotNil(t, actual)
+	})
+
+	t.Run("empty mode", func(t *testing.T) {
+		t.Setenv(EnvLogMode, "")
+		actual := FromEnv()
+		assert.NotNil(t, actual)
+	})
 }
